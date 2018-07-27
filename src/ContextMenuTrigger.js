@@ -35,29 +35,14 @@ export default class ContextMenuTrigger extends Component {
     touchHandled = false;
 
     handleMouseDown = (event) => {
-        if (this.props.holdToDisplay >= 0 && event.button === 0) {
-            event.persist();
-            event.stopPropagation();
-
-            this.mouseDownTimeoutId = setTimeout(
-                () => this.handleContextClick(event),
-                this.props.holdToDisplay
-            );
-        }
         callIfExists(this.props.attributes.onMouseDown, event);
     }
 
     handleMouseUp = (event) => {
-        if (event.button === 0) {
-            clearTimeout(this.mouseDownTimeoutId);
-        }
         callIfExists(this.props.attributes.onMouseUp, event);
     }
 
     handleMouseOut = (event) => {
-        if (event.button === 0) {
-            clearTimeout(this.mouseDownTimeoutId);
-        }
         callIfExists(this.props.attributes.onMouseOut, event);
     }
 
